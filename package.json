@@ -1,0 +1,19 @@
+{
+  "name": "askmediagroupthcc",
+  "version": "1.0.0",
+  "description": "Take Home Coding Challenge given by Ask Media Group to Ricky Marasigan",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rickysoliman/askmediagroupthcc.git"
+  },
+  "author": "Ricky Marasigan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rickysoliman/askmediagroupthcc/issues"
+  },
+  "homepage": "https://github.com/rickysoliman/askmediagroupthcc#readme"
+}
