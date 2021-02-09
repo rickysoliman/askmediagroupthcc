@@ -351,3 +351,6 @@ MigrationBackup/
 
 # setup commands
 setup.sh
+
+# github api access token
+token.js

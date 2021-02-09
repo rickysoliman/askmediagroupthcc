@@ -1,4 +1,5 @@
 import React from 'react';
+import InputForm from './components/InputForm.jsx';
 
 class App extends React.Component {
     constructor() {
@@ -6,7 +7,9 @@ class App extends React.Component {
     }
 
     render() {
-        return <div>Hello World</div>
+        return (
+            <InputForm/>
+        )
     }
 }
 
