@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import Results from './Results.jsx';
 import token from '../../../token.js';
 
@@ -10,12 +11,13 @@ class InputForm extends React.Component {
         this.state = {
             user: '',
             repo: '',
-            query: ''
+            dates: []
         }
 
         this.handleUserChange = this.handleUserChange.bind(this);
         this.handleRepoChange = this.handleRepoChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.filter = this.filter.bind(this);
         this.clear = this.clear.bind(this);
     }
 
@@ -36,17 +38,46 @@ class InputForm extends React.Component {
         var query = `${usernameForm.value}/${repoForm.value}`;
         usernameForm.value = '';
         repoForm.value = '';
-        this.setState({
-            query,
-            user: '',
-            repo: ''
-        });
+
+        axios.get(`https://api.github.com/repos/${query}/commits`)
+            .then(res => {
+                var data = res.data;
+                var updatedState = this.state.dates;
+                for (let i = 0; i < data.length; i++) {
+                    updatedState.push(data[i].commit.committer.date.slice(0, 10));
+                }
+                updatedState = this.filter(updatedState);
+                this.setState({
+                    dates: updatedState,
+                    user: '',
+                    repo: ''
+                });
+            })
+            .catch(err => {
+                console.log(err.stack);
+            });
+
+    }
+
+    filter(dates) {
+        if (dates.length > 0) {
+            var today = new Date();
+            var cutoffDate = new Date(`${today.getFullYear() - 1}-${today.getMonth() + 1}-${today.getDate()}`);
+            for (let i = 0; i < dates.length; i++) {
+                var commitDate = new Date(dates[i]);
+                if (commitDate < cutoffDate) {
+                    i === 0 ? dates = ['This repository has had no commits within the past 52 weeks.'] : dates = dates.slice(0, i);
+                    break;
+                }
+            }
+            return dates;
+        }
     }
 
     clear(e) {
         e.preventDefault();
         this.setState({
-            query: ''
+            dates: []
         });
     }
 
@@ -61,7 +92,7 @@ class InputForm extends React.Component {
                     <button onClick={this.handleSubmit}>Enter</button>
                     <button onClick={this.clear}>Clear</button>
                 </form>
-                <Results results={this.state.query}/>
+                <Results results={this.state.dates.length > 0 ? this.state.dates : []}/>
             </>
         )
     }

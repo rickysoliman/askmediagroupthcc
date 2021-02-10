@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-// const pool = require('../db/queries.js');
 const bodyParser = require('body-parser');
 const PORT = 3000;
 
