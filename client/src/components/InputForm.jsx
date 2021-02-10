@@ -11,6 +11,7 @@ class InputForm extends React.Component {
         this.state = {
             user: '',
             repo: '',
+            query: '',
             dates: []
         }
 
@@ -33,6 +34,9 @@ class InputForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        if (this.state.dates.length > 0) {
+            return null;
+        }
         var usernameForm = document.getElementById('username');
         var repoForm = document.getElementById('reponame');
         var query = `${usernameForm.value}/${repoForm.value}`;
@@ -50,11 +54,15 @@ class InputForm extends React.Component {
                 this.setState({
                     dates: updatedState,
                     user: '',
-                    repo: ''
+                    repo: '',
+                    query
                 });
             })
             .catch(err => {
                 console.log(err.stack);
+                this.setState({
+                    dates: 'Commits not found'
+                });
             });
 
     }
@@ -66,7 +74,7 @@ class InputForm extends React.Component {
             for (let i = 0; i < dates.length; i++) {
                 var commitDate = new Date(dates[i]);
                 if (commitDate < cutoffDate) {
-                    i === 0 ? dates = ['This repository has had no commits within the past 52 weeks.'] : dates = dates.slice(0, i);
+                    i === 0 ? dates = 'This repository has had no commits within the past 52 weeks.' : dates = dates.slice(0, i);
                     break;
                 }
             }
@@ -90,9 +98,9 @@ class InputForm extends React.Component {
                     <label>Repository name:</label>
                     <input id="reponame" onChange={this.handleRepoChange}></input><br/>
                     <button onClick={this.handleSubmit}>Enter</button>
-                    <button onClick={this.clear}>Clear</button>
+                    <button canUse={this.state.dates.length > 0} onClick={this.clear}>Clear</button>
                 </form>
-                <Results results={this.state.dates.length > 0 ? this.state.dates : []}/>
+                <Results query={this.state.query} results={this.state.dates.length > 0 ? this.state.dates : []}/>
             </>
         )
     }
