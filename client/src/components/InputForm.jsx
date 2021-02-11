@@ -46,6 +46,11 @@ class InputForm extends React.Component {
         axios.get(`https://api.github.com/repos/${query}/commits`)
             .then(res => {
                 let data = res.data;
+                let avatarUrl = null;
+                if (data[0].author) {
+                    avatarUrl = data[0].author.avatar_url;
+                }
+                console.log(`avatarUrl: ${avatarUrl}`);
                 let updatedState = [];
                 for (let i = 0; i < data.length; i++) {
                     updatedState.push(data[i].commit.committer.date.slice(0, 10));
@@ -55,7 +60,8 @@ class InputForm extends React.Component {
                     dates: updatedState,
                     user: '',
                     repo: '',
-                    query
+                    query,
+                    avatarUrl
                 });
             })
             .catch(err => {
@@ -91,7 +97,7 @@ class InputForm extends React.Component {
 
     render() {
         return (
-            <>
+            <Main>
                 <form>
                     <label>User name:</label>
                     <input id="username" onChange={this.handleUserChange}></input><br/>
@@ -100,10 +106,17 @@ class InputForm extends React.Component {
                     <button onClick={this.handleSubmit}>Enter</button>
                     <button canUse={this.state.dates.length > 0} onClick={this.clear}>Clear</button>
                 </form>
-                <Results query={this.state.query} results={this.state.dates.length > 0 ? this.state.dates : []}/>
-            </>
+                <Results avatarUrl={this.state.avatarUrl} query={this.state.query} results={this.state.dates.length > 0 ? this.state.dates : []}/>
+            </Main>
         )
     }
 }
+
+const Main = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
 
 export default InputForm;

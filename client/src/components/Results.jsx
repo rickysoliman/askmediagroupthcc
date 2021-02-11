@@ -9,7 +9,8 @@ class Results extends React.Component {
             dates: this.props.results,
             highestAverageWeekday: null,
             highestAverage: null,
-            query: this.props.query
+            query: this.props.query,
+            avatarUrl: this.props.avatarUrl
         }
 
         this.findAverages = this.findAverages.bind(this);
@@ -20,7 +21,8 @@ class Results extends React.Component {
             dates: newProps.results,
             highestAverage: null,
             highestAverageWeekday: null,
-            query: newProps.query
+            query: newProps.query,
+            avatarUrl: newProps.avatarUrl
         });
     } 
 
@@ -92,13 +94,28 @@ class Results extends React.Component {
             return null;
         } else {
             return (
-                <>
+                <Main>
                     <h2>github.com/{this.state.query}</h2>
-                    <div>In the past year, {this.state.highestAverageWeekday} had the highest number of commits, with an average of {this.state.highestAverage} commits per day.</div>
-                </>
+                    {this.state.avatarUrl ? <Img src={this.state.avatarUrl}></Img> : <div></div>}
+                    <p>In the past year, {this.state.highestAverageWeekday} had the highest number of commits, with an average of {this.state.highestAverage} {this.state.highestAverage === 1 ? 'commit' : 'commits'} per day.</p>
+                </Main>
             )   
         }
     }
 }
+
+const Img = styled.img`
+    width: 100px;
+    height: 100px;
+`;
+
+const Main = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+    color: #24292e;
+`;
 
 export default Results;
