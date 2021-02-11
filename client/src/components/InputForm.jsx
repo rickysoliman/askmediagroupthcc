@@ -98,19 +98,43 @@ class InputForm extends React.Component {
     render() {
         return (
             <Main>
-                <form>
-                    <label>User name:</label>
-                    <input id="username" onChange={this.handleUserChange}></input><br/>
-                    <label>Repository name:</label>
-                    <input id="reponame" onChange={this.handleRepoChange}></input><br/>
-                    <button onClick={this.handleSubmit}>Enter</button>
-                    <button canUse={this.state.dates.length > 0} onClick={this.clear}>Clear</button>
-                </form>
+                <Form>
+                    <Input placeholder="user name" id="username" onChange={this.handleUserChange}></Input><br/>
+                    <Input placeholder="repository name" id="reponame" onChange={this.handleRepoChange}></Input><br/>
+                    <Button submit={true} onClick={this.handleSubmit}>Enter</Button>
+                    <Button submit={false} canUse={this.state.dates.length > 0} onClick={this.clear}>Clear</Button>
+                </Form>
                 <Results avatarUrl={this.state.avatarUrl} query={this.state.query} results={this.state.dates.length > 0 ? this.state.dates : []}/>
             </Main>
         )
     }
 }
+
+const Input = styled.input`
+    padding: 10px;
+`;
+
+const Button = styled.button`
+    background-color: ${props => props.submit ? '#0465d6' : '#eaedf0'};
+    color: ${props => props.submit ? 'white' : 'black'};
+    border-radius: 10px;
+    border: transparent;
+    width: fit-content;
+    font-size: 1em;
+    padding: 10px;
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+    padding: 20px;
+`
 
 const Main = styled.div`
     display: flex;

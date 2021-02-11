@@ -93,9 +93,10 @@ class Results extends React.Component {
         if (!this.state.highestAverage && !this.state.highestAverageWeekday) {
             return null;
         } else {
+            let url = `https://github.com/${this.state.query}`;
             return (
                 <Main>
-                    <h2>github.com/{this.state.query}</h2>
+                    <Link href={url}>github.com/{this.state.query}</Link>
                     {this.state.avatarUrl ? <Img src={this.state.avatarUrl}></Img> : <div></div>}
                     <p>In the past year, {this.state.highestAverageWeekday} had the highest number of commits, with an average of {this.state.highestAverage} {this.state.highestAverage === 1 ? 'commit' : 'commits'} per day.</p>
                 </Main>
@@ -104,9 +105,21 @@ class Results extends React.Component {
     }
 }
 
+const Link = styled.a`
+    font-family: Arial;
+    color: black;
+    font-size: 1em;
+    text-decoration: none;
+    padding: 10px;
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+`;
+
 const Img = styled.img`
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
 `;
 
 const Main = styled.div`
