@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Results from './Results.jsx';
-import token from '../../../token.js';
 
 class InputForm extends React.Component {
     constructor() {
@@ -50,7 +49,6 @@ class InputForm extends React.Component {
                 if (data[0].author) {
                     avatarUrl = data[0].author.avatar_url;
                 }
-                console.log(`avatarUrl: ${avatarUrl}`);
                 let updatedState = [];
                 for (let i = 0; i < data.length; i++) {
                     updatedState.push(data[i].commit.committer.date.slice(0, 10));
@@ -101,8 +99,10 @@ class InputForm extends React.Component {
                 <Form>
                     <Input placeholder="user name" id="username" onChange={this.handleUserChange}></Input><br/>
                     <Input placeholder="repository name" id="reponame" onChange={this.handleRepoChange}></Input><br/>
-                    <Button submit={true} onClick={this.handleSubmit}>Enter</Button>
-                    <Button submit={false} canUse={this.state.dates.length > 0} onClick={this.clear}>Clear</Button>
+                    <Buttons>
+                        <Button submit={true} onClick={this.handleSubmit}>Enter</Button>
+                        <Button submit={false} canUse={this.state.dates.length > 0} onClick={this.clear}>Clear</Button>
+                    </Buttons>
                 </Form>
                 <Results avatarUrl={this.state.avatarUrl} query={this.state.query} results={this.state.dates.length > 0 ? this.state.dates : []}/>
             </Main>
@@ -112,6 +112,11 @@ class InputForm extends React.Component {
 
 const Input = styled.input`
     padding: 10px;
+`;
+
+const Buttons = styled.div`
+    display: flex;
+    justify-content: center;
 `;
 
 const Button = styled.button`

@@ -61,8 +61,8 @@ class Results extends React.Component {
                 let average = totalCommits / length;
                 averages[day] = average
             }
-            console.log(hashMap);
-            console.log(averages);
+            // console.log(hashMap);
+            // console.log(averages);
             let highestAverage = 0;
             let highestAverageWeekday = '';
             for (let day in averages) {
@@ -77,7 +77,6 @@ class Results extends React.Component {
                 let decimal = arr[1];
                 decimal[1] === '0' ? highestAverage = Number(`${num}.${decimal[0]}`) : highestAverage = highestAverage.toFixed(1);
             }
-            // console.log(highestAverage);
             this.setState({
                 highestAverage,
                 highestAverageWeekday
@@ -87,7 +86,11 @@ class Results extends React.Component {
 
     render() {
         if (typeof this.state.dates === 'string') {
-            return <div>{this.state.dates}</div>
+            return (
+                <Main>
+                    <div>{this.state.dates}</div>
+                </Main>
+            )
         }
         this.findAverages();
         if (!this.state.highestAverage && !this.state.highestAverageWeekday) {
@@ -129,6 +132,7 @@ const Main = styled.div`
     align-items: center;
     font-family: Arial;
     color: #24292e;
+    text-align: center;
 `;
 
 export default Results;
