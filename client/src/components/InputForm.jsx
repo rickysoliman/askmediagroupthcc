@@ -23,30 +23,30 @@ class InputForm extends React.Component {
     }
 
     handleUserChange(e) {
-        var user = e.target.value;
+        let user = e.target.value;
         this.setState({ user });
     }
 
     handleRepoChange(e) {
-        var repo = e.target.value;
+        let repo = e.target.value;
         this.setState({ repo });
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        if (this.state.dates.length > 0) {
+        if (this.state.dates.length > 0 || this.state.user === '' || this.state.repo === '') {
             return null;
         }
-        var usernameForm = document.getElementById('username');
-        var repoForm = document.getElementById('reponame');
-        var query = `${usernameForm.value}/${repoForm.value}`;
-        usernameForm.value = '';
-        repoForm.value = '';
+        let username = this.state.user;
+        let repo = this.state.repo;
+        let query = `${username}/${repo}`;
+        document.getElementById('username').value = '';
+        document.getElementById('reponame').value = '';
 
         axios.get(`https://api.github.com/repos/${query}/commits`)
             .then(res => {
-                var data = res.data;
-                var updatedState = this.state.dates;
+                let data = res.data;
+                let updatedState = [];
                 for (let i = 0; i < data.length; i++) {
                     updatedState.push(data[i].commit.committer.date.slice(0, 10));
                 }
@@ -69,10 +69,10 @@ class InputForm extends React.Component {
 
     filter(dates) {
         if (dates.length > 0) {
-            var today = new Date();
-            var cutoffDate = new Date(`${today.getFullYear() - 1}-${today.getMonth() + 1}-${today.getDate()}`);
+            let today = new Date();
+            let cutoffDate = new Date(`${today.getFullYear() - 1}-${today.getMonth() + 1}-${today.getDate()}`);
             for (let i = 0; i < dates.length; i++) {
-                var commitDate = new Date(dates[i]);
+                let commitDate = new Date(dates[i]);
                 if (commitDate < cutoffDate) {
                     i === 0 ? dates = 'This repository has had no commits within the past 52 weeks.' : dates = dates.slice(0, i);
                     break;
