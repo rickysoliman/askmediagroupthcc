@@ -122,15 +122,18 @@ const Buttons = styled.div`
 `;
 
 const Button = styled.button`
-    background-color: ${props => props.submit ? '#0465d6' : '#eaedf0'};
-    color: ${props => props.submit ? 'white' : 'black'};
-    border-radius: 10px;
+    background-color: ${props => props.submit ? '#d1e3f8' : '#cacdcf'};
+    color: ${props => props.submit ? '#0465d6' : 'black'};
+    border-radius: 2em;
     border: 2px solid transparent;
     width: fit-content;
     font-size: 1em;
     padding: 10px;
     &:hover {
         cursor: pointer;
+        box-shadow: 5px 10px 8px #888888;
+        background-color: ${props => props.submit ? '#005cc5' : '#586069'};
+        color: white;
     }
 `;
 

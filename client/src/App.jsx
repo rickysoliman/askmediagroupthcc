@@ -35,7 +35,11 @@ const Title = styled.h1`
 
 const Header = styled.div`
     background-color: #242a2e;
+    border: 10px solid #242a2e;
     margin: 0;
     padding: 0;
     width: 100%;
+    &:hover {
+        cursor: default;
+    }
 `;

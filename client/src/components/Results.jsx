@@ -123,6 +123,7 @@ const Link = styled.a`
 const Img = styled.img`
     width: 150px;
     height: 150px;
+    box-shadow: 5px 10px 8px #888888;
 `;
 
 const Main = styled.div`
