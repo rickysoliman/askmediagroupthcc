@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import InputForm from '../components/InputForm.jsx';
 
 it('renders the correct placeholder names', () => {

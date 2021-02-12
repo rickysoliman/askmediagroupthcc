@@ -24,7 +24,7 @@ export default class Results extends React.Component {
             query: newProps.query,
             avatarUrl: newProps.avatarUrl
         });
-    } 
+    }  
 
     findAverages() {
         if (this.state.dates.length > 0 && !this.state.highestAverage && !this.state.highestAverageWeekday) {

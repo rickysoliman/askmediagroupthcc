@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+    mode: 'development',
     entry: path.resolve(__dirname, 'client/src/index.js'),
     output: {
         path: path.resolve(__dirname, 'client/dist'),
@@ -30,7 +31,6 @@ module.exports = {
         extensions: ['.js', '.json', '.jsx', '.css'],
         symlinks: false,
     },
-    watch: true,
     watchOptions: {
         poll: true,
         ignored: /node_modules/
