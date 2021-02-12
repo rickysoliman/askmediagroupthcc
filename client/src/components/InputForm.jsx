@@ -112,6 +112,12 @@ export default class InputForm extends React.Component {
 
 const Input = styled.input`
     padding: 10px;
+    border: 2px solid #d8dbdb;
+    background-color: #fafbfc;
+    border-radius: 5px;
+    &:hover {
+        border: 2px solid #d1e3f8;
+    }
 `;
 
 const Buttons = styled.div`
