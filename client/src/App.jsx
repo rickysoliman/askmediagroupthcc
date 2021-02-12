@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import InputForm from './components/InputForm.jsx';
 
-class App extends React.Component {
+export default class App extends React.Component {
     constructor() {
         super();
     }
@@ -39,5 +39,3 @@ const Header = styled.div`
     padding: 0;
     width: 100%;
 `;
-
-export default App;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Results from './Results.jsx';
 
-class InputForm extends React.Component {
+export default class InputForm extends React.Component {
     constructor() {
         super();
 
@@ -117,13 +117,15 @@ const Input = styled.input`
 const Buttons = styled.div`
     display: flex;
     justify-content: center;
+    padding: 10px;
+    margin: auto;
 `;
 
 const Button = styled.button`
     background-color: ${props => props.submit ? '#0465d6' : '#eaedf0'};
     color: ${props => props.submit ? 'white' : 'black'};
     border-radius: 10px;
-    border: transparent;
+    border: 2px solid transparent;
     width: fit-content;
     font-size: 1em;
     padding: 10px;
@@ -147,5 +149,3 @@ const Main = styled.div`
     justify-content: center;
     align-items: center;
 `;
-
-export default InputForm;

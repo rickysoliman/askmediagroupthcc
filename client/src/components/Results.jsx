@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-class Results extends React.Component {
+export default class Results extends React.Component {
     constructor(props) {
         super(props);
 
@@ -16,7 +16,7 @@ class Results extends React.Component {
         this.findAverages = this.findAverages.bind(this);
     }
 
-    componentWillReceiveProps(newProps) {
+    UNSAFE_componentWillReceiveProps(newProps) {
         this.setState({
             dates: newProps.results,
             highestAverage: null,
@@ -88,7 +88,7 @@ class Results extends React.Component {
         if (typeof this.state.dates === 'string') {
             return (
                 <Main>
-                    <div>{this.state.dates}</div>
+                    <div id="error">{this.state.dates}</div>
                 </Main>
             )
         }
@@ -134,5 +134,3 @@ const Main = styled.div`
     color: #24292e;
     text-align: center;
 `;
-
-export default Results;
