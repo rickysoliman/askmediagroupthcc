@@ -97,7 +97,7 @@ export default class Results extends React.Component {
             let url = `https://github.com/${this.state.query}`;
             return (
                 <Main>
-                    <Link href={url}>github.com/{this.state.query}</Link>
+                    <Link target="_blank" href={url}>github.com/{this.state.query}</Link>
                     {this.state.avatarUrl ? <Img src={this.state.avatarUrl}></Img> : <div></div>}
                     <p>In the past year, <strong>{this.state.highestAverageWeekday}</strong> had the highest number of commits, with an average of <strong>{this.state.highestAverage} {this.state.highestAverage === 1 ? 'commit' : 'commits'}</strong> per day.</p>
                 </Main>
